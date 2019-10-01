@@ -1,4 +1,5 @@
-import cmd, sys, socket
+import cmd, sys, socket, pickle
+from trame import Trame
 
 #Instance principale de l'application de test
 class Main(cmd.Cmd):
@@ -19,8 +20,11 @@ class Main(cmd.Cmd):
         while message != "exit":
             #Saisie du message
             message = input(">> ")
-            #Envoi du message
-            s.send(message.encode())
+            #Serialization
+            trame = Trame(1, 2, message)
+            trame = pickle.dumps(trame)
+            #Envoi de la trame
+            s.send(trame)
         #Si on saisi exit, on sort de la boucle et on se déconnecte donc du serveur
         s.close()
         print("Déconnecté du serveur")
