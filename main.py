@@ -21,7 +21,7 @@ class Main(cmd.Cmd):
             #Saisie du message
             message = input(">> ")
             #Serialization
-            trame = Trame(1, 2, message)
+            trame = Trame(1, 1, message)
             trame = pickle.dumps(trame)
             #Envoi de la trame
             s.send(trame)
